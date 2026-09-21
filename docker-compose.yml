@@ -1,5 +1,3 @@
-name: whisper-stt
-
 services:
   whisper-stt:
     image: fedirz/faster-whisper-server:latest-cpu
@@ -9,21 +7,11 @@ services:
       - WHISPER__DEVICE=cpu
       - WHISPER__COMPUTE_TYPE=int8
     ports:
-      - "127.0.0.1:8000:8000"
+      - 127.0.0.1:8000:8000
     volumes:
       - whisper-models:/root/.cache/huggingface
-    networks:
-      - shared-services
-      - vexa
     restart: unless-stopped
-
 volumes:
   whisper-models:
-
-networks:
-  shared-services:
-    name: shared-services
-    driver: bridge
-  vexa:
     external: true
-    name: vexa
+    name: whisper-stt-ic4jw4_whisper-models
